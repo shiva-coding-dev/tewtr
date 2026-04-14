@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+pymupdf
+pytesseract
+pillow
+httpx
+pydantic
+python-dotenv
+langchain
+langchain-openai
+langgraph
+openai
+google-genai
