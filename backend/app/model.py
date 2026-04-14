@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-# Clarifai OpenAI-proxy model IDs (full versioned URLs)
 CLARIFAI_GEMINI_FLASH_LITE = (
     "https://clarifai.com/gcp/generate/models/gemini-3_1-flash-lite-preview/versions/110acf0cc7574bfd83fedea1cfd2ef82"
 )

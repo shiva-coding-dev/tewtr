@@ -7,20 +7,17 @@ from .pdf_processor import PDFProcessor
 
 class VLMAgent:
     def __init__(self):
-        # Stage 1: Clarifai + Gemini (vision)
         self.vlm = VLMModel(provider="clarifai")
-        # Stage 2: Clarifai + DeepSeek V3.2 (text / pedagogy)
         self.llm = VLMModel(
             provider="clarifai",
             clarifai_model_id=CLARIFAI_DEEPSEEK_V3_2,
             max_tokens=8192,
             temperature=0.35,
         )
-        # Follow-up Enquiry: Baseten + Nemotron
         self.enquiry_llm = VLMModel(
             provider="baseten",
             max_tokens=4096,
-            temperature=0.4
+            temperature=0.4,
         )
 
     async def transcribe_page(self, file_path: str, page_index: int) -> str:
@@ -65,7 +62,7 @@ class VLMAgent:
         system_prompt = (
             "You are the Stage-2 pedagogy engine for a STEM study companion. "
             "You MUST respond with a single valid JSON object and nothing else: no markdown code fences, no preamble, no trailing commentary.\n\n"
-            "Keys (exactly one): \"explanation\" only. Do not output \"thought\", \"flashcards\", or any other top-level keys.\n\n"
+            "Keys (exactly one): \"explanation\" only. Do not output any other top-level keys.\n\n"
 
             "DOUBLE-ESCAPED LATEX (non-negotiable — breaking this corrupts parsing and breaks math rendering):\n"
             "The response is parsed with a JSON parser. Inside JSON string values, each LaTeX backslash must be doubled.\n"
